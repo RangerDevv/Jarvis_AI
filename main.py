@@ -1,4 +1,5 @@
 from datetime import datetime
+from traceback import print_stack
 from urllib import response
 import speech_recognition as sr
 import pyttsx3
@@ -7,7 +8,6 @@ import pyttsx3
 
 r = sr.Recognizer()
 def SpeakText(command):
-     
     # Initialize the engine
     engine = pyttsx3.init()
     engine.say(command)
@@ -19,8 +19,8 @@ while True:
     with sr.Microphone() as source:
         print("Talk")
         audio_text = r.listen(source)
-        resp = ""
         print(r.recognize_google(audio_text))
+        resp = ""
         if r.recognize_google(audio_text)=="what is your name":
             resp = "My name is Jarvis, Your personal assistant. How can I help?"
             SpeakText(resp)
@@ -32,5 +32,3 @@ while True:
             resp = "sorry, I dont understand."
             SpeakText(resp)
 # recoginize_() method will throw a request error if the API is unreachable, hence using exception handling
-
-
