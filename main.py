@@ -3,6 +3,7 @@ from traceback import print_stack
 from urllib import response
 import speech_recognition as sr
 import pyttsx3
+import wikipedia as wp
 
 # Initialize recognizer class (for recognizing the speech)
 
@@ -15,6 +16,7 @@ def SpeakText(command):
 
 # Reading Microphone as source
 # listening the speech and store in audio_text variable
+
 while True:
     with sr.Microphone() as source:
         print("Talk")
@@ -28,6 +30,9 @@ while True:
             resp = "good day sir!"
             SpeakText(resp)
             break
+        if  r.recognize_google(audio_text)=="who is Albert Einstein":
+            search = wp.summary("Albert Einstein", sentences=4)
+            SpeakText(search)
         else:
             resp = "sorry, I dont understand."
             SpeakText(resp)
